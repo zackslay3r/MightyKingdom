@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\PlayerCamera.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/zacka/Desktop/MightyKingdom/MightyKingdom/MightyKingdomPlatformer/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
