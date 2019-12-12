@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ObjectPoolScript.cs" />
+    <Compile Include="Assets\Scripts\PlatformCreator.cs" />
+    <Compile Include="Assets\Scripts\PlatformRemover.cs" />
     <Compile Include="Assets\Scripts\PlayerCamera.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Reference Include="Unity.Timeline.Editor">
