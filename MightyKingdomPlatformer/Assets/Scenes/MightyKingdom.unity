@@ -522,10 +522,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 74971259}
   highScoreText: {fileID: 544286203}
-  score: 5
-  highScore: 50
-  scorePerSecond: 0
-  increaseScore: 0
+  score: 0
+  highScore: 0
+  scorePerSecond: 3
+  increaseScore: 1
 --- !u!1 &497909480
 GameObject:
   m_ObjectHideFlags: 0

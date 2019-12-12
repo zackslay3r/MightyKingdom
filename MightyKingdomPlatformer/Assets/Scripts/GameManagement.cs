@@ -14,12 +14,23 @@ public class GameManagement : MonoBehaviour
     private PlatformRemover[] platformList;
 
 
+    // We need to have a reference to the score manager
+    // So that we can stop the score increaing when we die.
+    private ScoreManager scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        
+
         platformStartLocation = platformGenerator.position;
         spawnPoint = player.transform.position;
 
+        //set score manager to be that of the the object type "ScoreManager".
+        scoreManager = FindObjectOfType<ScoreManager>();
+        
+        // once the game starts, allow the player to start recieving score.
+        scoreManager.increaseScore = true;
     }
 
     // Update is called once per frame
@@ -38,6 +49,9 @@ public class GameManagement : MonoBehaviour
     {
         // disable the player so that no actions can take place while we are respawning.
         player.gameObject.SetActive(false);
+
+        //stop the player from receiving score.
+        scoreManager.increaseScore = false;
         yield return new WaitForSeconds(0.5f);
 
         // When the player dies, set all the platforms that have been generated to inactive.
@@ -53,7 +67,9 @@ public class GameManagement : MonoBehaviour
         platformGenerator.position = platformStartLocation;
         // turn the player back on once the resetting has finished.
         player.gameObject.SetActive(true);
-
+        // Reset the score. and allow the player to have his score increase again once the score is reset.
+        scoreManager.score = 0.0f;
+        scoreManager.increaseScore = true;
         
        
 

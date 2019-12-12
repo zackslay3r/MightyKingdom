@@ -47,7 +47,10 @@ public class PlayerMovement : MonoBehaviour
 
     public GameManagement gameManager;
 
-    
+
+    // We need to have a reference to the score manager
+    // So that we can stop the score increaing when we die.
+    private ScoreManager scoreManager;
 
     
     // Start is called before the first frame update
@@ -58,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
         storedSpeed = speed;
         speedMilestoneCountStored = speedMilestoneCount;
         distanceMilestoneStored = distanceMilestone;
+
+
+        //assign the reference for the score manager.
+        scoreManager = FindObjectOfType<ScoreManager>();
 
 
         //Assign the value for playerRb
