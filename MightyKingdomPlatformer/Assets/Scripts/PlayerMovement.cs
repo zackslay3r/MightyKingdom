@@ -48,9 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public GameManagement gameManager;
 
 
-    // We need to have a reference to the score manager
-    // So that we can stop the score increaing when we die.
-    private ScoreManager scoreManager;
+    private bool stoppedJumping;
 
     
     // Start is called before the first frame update
@@ -63,8 +61,7 @@ public class PlayerMovement : MonoBehaviour
         distanceMilestoneStored = distanceMilestone;
 
 
-        //assign the reference for the score manager.
-        scoreManager = FindObjectOfType<ScoreManager>();
+      
 
 
         //Assign the value for playerRb
@@ -77,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
         jumpTimeCounter = jumpTime;
 
         speedMilestoneCount = distanceMilestone;
+
+        stoppedJumping = true;
     }
 
     // Update is called once per frame
@@ -110,9 +109,10 @@ public class PlayerMovement : MonoBehaviour
             if (onGround)
             {
                 playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                stoppedJumping = false;
             }
         }
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && !stoppedJumping)
             {
                 if (jumpTimeCounter > 0)
                 {
@@ -128,13 +128,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             jumpTimeCounter = 0;
+            stoppedJumping = true;
         }
 
         
         if (onGround)
         {
             jumpTimeCounter = jumpTime;
-         
+            
         }
         
         playerAnimator.SetFloat("Speed", playerRb.velocity.x);
@@ -147,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Catcher")
         {
+           
             gameManager.RestartGame();
             
             

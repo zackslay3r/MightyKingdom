@@ -11,7 +11,7 @@ public class GameManagement : MonoBehaviour
     public PlayerMovement player;
     private Vector3 spawnPoint;
 
-    private PlatformRemover[] platformList;
+    private objectRemover[] platformList;
 
 
     // We need to have a reference to the score manager
@@ -55,7 +55,7 @@ public class GameManagement : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // When the player dies, set all the platforms that have been generated to inactive.
-        platformList = FindObjectsOfType<PlatformRemover>();
+        platformList = FindObjectsOfType<objectRemover>();
         for (int i = 0; i < platformList.Length; i++)
         {
             platformList[i].gameObject.SetActive(false);

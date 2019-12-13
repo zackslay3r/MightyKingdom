@@ -53,4 +53,9 @@ public class ScoreManager : MonoBehaviour
     }
 
 
+    public void AddScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+    }
+
 }

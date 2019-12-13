@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformRemover : MonoBehaviour
+public class objectRemover : MonoBehaviour
 {
-    public GameObject platformDestroyPoint;
+    public GameObject objectDestroyPoint;
 
 
     // Start is called before the first frame update
     void Start()
     {
         // Find the destroy point of which we will delete platforms from.
-        platformDestroyPoint = GameObject.Find("DestroyPoint");
+        objectDestroyPoint = GameObject.Find("DestroyPoint");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < platformDestroyPoint.transform.position.x)
+        if (transform.position.x < objectDestroyPoint.transform.position.x)
         {
             //Destroy(gameObject);
             gameObject.SetActive(false);

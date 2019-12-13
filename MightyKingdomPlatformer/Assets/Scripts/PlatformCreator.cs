@@ -27,10 +27,17 @@ public class PlatformCreator : MonoBehaviour
     public float maximumHeightChange;
     private float heightChange;
 
+
+    //get a reference to the coin generator.
+    private CoinCreator coinCreator;
+    // create a number that will act as the random percentage for coins to spawn.
+    public float randomCoinGeneratePercentage;
+
     // Start is called before the first frame update
     void Start()
     {
 
+        coinCreator = FindObjectOfType<CoinCreator>();
 
         // Get the length of the platform that we are about to generate.
         //platformWidth = newPlatform.GetComponent<BoxCollider2D>().size.x;
@@ -80,6 +87,15 @@ public class PlatformCreator : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
+            if (Random.Range(0.0f, 100.0f) < randomCoinGeneratePercentage)
+            {
+                
+                
+                
+                
+                // Add the coins to the platform.
+                coinCreator.GenerateCoins(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z));
+            }
 
             transform.position = new Vector3(transform.position.x + (platformWidths[platformIndex] / 2), transform.position.y, transform.position.z);
 
