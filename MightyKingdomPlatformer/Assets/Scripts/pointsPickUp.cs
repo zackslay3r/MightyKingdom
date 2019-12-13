@@ -9,6 +9,8 @@ public class pointsPickUp : MonoBehaviour
 
     private ScoreManager scoreManager;
 
+    // get a reference to coin sound to play the sound when a coin is picked up.
+    private AudioSource coinSound;
 
 
     // Start is called before the first frame update
@@ -17,6 +19,7 @@ public class pointsPickUp : MonoBehaviour
         //ensure that the score manager is assigned to the one within the game.
         scoreManager = FindObjectOfType<ScoreManager>();
 
+        coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>();
     }
 
 
@@ -27,7 +30,17 @@ public class pointsPickUp : MonoBehaviour
         {
             scoreManager.AddScore(scoreAmount);
             gameObject.SetActive(false);
-            
+
+            if (coinSound.isPlaying)
+            {
+                coinSound.Stop();
+                coinSound.Play();
+            }
+            else
+            {
+                coinSound.Play();
+            }
+
         }
 
     }

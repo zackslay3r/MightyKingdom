@@ -49,8 +49,14 @@ public class PlayerMovement : MonoBehaviour
 
 
     private bool stoppedJumping;
+    private bool canDoubleJump;
 
-    
+
+    // Get the references for the two sounds that are within the game.
+    public AudioSource jumpSound;
+    public AudioSource deathSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         speedMilestoneCount = distanceMilestone;
 
         stoppedJumping = true;
+        canDoubleJump = true;
     }
 
     // Update is called once per frame
@@ -85,10 +92,10 @@ public class PlayerMovement : MonoBehaviour
 
 
         // Determine if we are on the ground by checking if we are touchiing anything of the layer 'ground'
-        //onGround = Physics2D.IsTouchingLayers(playerCollider, definedGround);
+      
         onGround = Physics2D.OverlapCircle(groundCheck.position, checkerSize, definedGround);
 
-
+       
 
         if (transform.position.x > speedMilestoneCount)
         {
@@ -110,11 +117,21 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
                 stoppedJumping = false;
+                onGround = false;
+                jumpSound.Play();
+            }
+            if (!onGround && canDoubleJump)
+            {
+                jumpTimeCounter = jumpTime;
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                canDoubleJump = false;
+                stoppedJumping = false;
+                jumpSound.Play();
             }
         }
-            if (Input.GetKey(KeyCode.Space) && !stoppedJumping)
+            if (Input.GetKey(KeyCode.Space) )
             {
-                if (jumpTimeCounter > 0)
+                if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
                 {
                     playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
                     jumpTimeCounter -= Time.deltaTime;
@@ -135,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
         if (onGround)
         {
             jumpTimeCounter = jumpTime;
-            
+            canDoubleJump = true;
         }
         
         playerAnimator.SetFloat("Speed", playerRb.velocity.x);
@@ -156,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
             speed = storedSpeed;
             speedMilestoneCount = speedMilestoneCountStored;
             distanceMilestone = distanceMilestoneStored;
+            deathSound.Play();
         }
     }
 
