@@ -6,8 +6,11 @@ using UnityEngine;
 public class DeathMenu : MonoBehaviour
 {
     public string mainMenuTitle;
-    
 
+    public GameManagement gameManager;
+
+
+  
 
     public void MainMenu()
     {
@@ -18,7 +21,7 @@ public class DeathMenu : MonoBehaviour
 
     public void Restart()
     {
-        FindObjectOfType<GameManagement>().Reset();
+        gameManager.Reset();
         
     }
 }

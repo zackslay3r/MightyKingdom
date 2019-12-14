@@ -25,7 +25,7 @@ public class GameManagement : MonoBehaviour
     public bool powerUpReset;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         
 
@@ -39,11 +39,7 @@ public class GameManagement : MonoBehaviour
         scoreManager.increaseScore = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     public void RestartGame()
     {

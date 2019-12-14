@@ -13,7 +13,7 @@ public class ObjectPoolScript : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         pooledObjects = new List<GameObject>();
 

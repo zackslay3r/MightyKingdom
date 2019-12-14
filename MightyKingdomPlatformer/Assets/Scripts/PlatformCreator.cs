@@ -44,7 +44,7 @@ public class PlatformCreator : MonoBehaviour
     public float powerUpPercentage;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
         coinCreator = FindObjectOfType<CoinCreator>();
