@@ -19,7 +19,7 @@ public class pointsPickUp : MonoBehaviour
         //ensure that the score manager is assigned to the one within the game.
         scoreManager = FindObjectOfType<ScoreManager>();
 
-        coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>();
+        coinSound = GameObject.Find("SoundCoin").GetComponent<AudioSource>();
     }
 
 

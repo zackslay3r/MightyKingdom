@@ -19,6 +19,10 @@ public class ScoreManager : MonoBehaviour
     // We also want a boolean for when the player dies, stop increasing the score.
     public bool increaseScore;
 
+    //If we have the double point powerup, we should double the amount of score we get from coins too
+    public bool shouldDouble;
+
+
     // When we start the game, check to see if we have a high score value in our playerPref
     // If we do, set the high score to be that of the high score stored.
     void Start()
@@ -55,6 +59,10 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int scoreToAdd)
     {
+        if (shouldDouble)
+        {
+            scoreToAdd = scoreToAdd * 2;
+        }
         score += scoreToAdd;
     }
 

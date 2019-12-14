@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 273572961323770473
     second: spritesheet_items_0
+  - first:
+      213: -4927104429618137585
+    second: PowerUp1
+  - first:
+      213: 7971085220506059795
+    second: PowerUp2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -121,7 +127,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,6 +135,48 @@ TextureImporter:
       bones: []
       spriteID: 65a5895f8be79c6478a4e4f7d721a64d
       internalID: 273572961323770473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PowerUp1
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 167
+        width: 71
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e3d8c1d460cbe44895d4d15e796e848
+      internalID: -4927104429618137585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PowerUp2
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 39
+        width: 72
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9931a02983a2cef49923be39769c35d5
+      internalID: 7971085220506059795
       vertices: []
       indices: 
       edges: []

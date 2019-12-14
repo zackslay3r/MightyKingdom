@@ -21,6 +21,9 @@ public class GameManagement : MonoBehaviour
 
     public DeathMenu deathScreen;
 
+
+    public bool powerUpReset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +77,8 @@ public class GameManagement : MonoBehaviour
         // Reset the score. and allow the player to have his score increase again once the score is reset.
         scoreManager.score = 0.0f;
         scoreManager.increaseScore = true;
+
+        powerUpReset = true;
     }
 
     /*

@@ -6,7 +6,7 @@ using UnityEngine;
 public class DeathMenu : MonoBehaviour
 {
     public string mainMenuTitle;
-
+    
 
 
     public void MainMenu()

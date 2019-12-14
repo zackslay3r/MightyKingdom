@@ -52,6 +52,14 @@ public class PlayerMovement : MonoBehaviour
     private bool canDoubleJump;
 
 
+    public bool inSky;
+
+    //have a private variable that will get the death screen within the game.
+    public GameObject deathScreen;
+
+    public GameObject pauseScreen;
+
+
     // Get the references for the two sounds that are within the game.
     public AudioSource jumpSound;
     public AudioSource deathSound;
@@ -60,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        deathScreen.SetActive(false);
+        pauseScreen.SetActive(false);
 
         // assign the store values that will be used for when the level restarts.
         storedSpeed = speed;
@@ -96,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         onGround = Physics2D.OverlapCircle(groundCheck.position, checkerSize, definedGround);
 
        
+       
 
         if (transform.position.x > speedMilestoneCount)
         {
@@ -110,16 +121,8 @@ public class PlayerMovement : MonoBehaviour
 
         // If we hit the spacebar or tap the screen, then we want the player to jump
         //if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Began)
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            //If we are on the ground, allow the player the ability to be able to jump.
-            if (onGround)
-            {
-                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
-                stoppedJumping = false;
-                onGround = false;
-                jumpSound.Play();
-            }
             if (!onGround && canDoubleJump)
             {
                 jumpTimeCounter = jumpTime;
@@ -128,42 +131,54 @@ public class PlayerMovement : MonoBehaviour
                 stoppedJumping = false;
                 jumpSound.Play();
             }
+
+            //If we are on the ground, allow the player the ability to be able to jump.
+            if (onGround)
+            {
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                stoppedJumping = false;
+                onGround = false;
+                jumpSound.Play();
+               
+            }
+            
         }
-            if (Input.GetKey(KeyCode.Space) )
+            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
                 if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
                 {
                     playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                    inSky = true;
                     jumpTimeCounter -= Time.deltaTime;
 
               
                 }
             }
-        
+
         //Once the player has let go of the space bar, dont allow them to press the space bar again.
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
         {
             jumpTimeCounter = 0;
             stoppedJumping = true;
-        }
 
-        
-        if (onGround)
-        {
-            jumpTimeCounter = jumpTime;
-            canDoubleJump = true;
+
         }
-        
+       
         playerAnimator.SetFloat("Speed", playerRb.velocity.x);
         playerAnimator.SetBool("Grounded", onGround);
-
+          if (onGround)
+            {
+                jumpTimeCounter = jumpTime;
+                canDoubleJump = true;
+            }
+       
     }
 
     // When we collide with the Catcher, kill the player and restart the level.
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Catcher")
+        if (other.gameObject.tag == "KillVolume")
         {
            
             gameManager.RestartGame();

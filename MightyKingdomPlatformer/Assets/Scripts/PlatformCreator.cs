@@ -33,6 +33,16 @@ public class PlatformCreator : MonoBehaviour
     // create a number that will act as the random percentage for coins to spawn.
     public float randomCoinGeneratePercentage;
 
+    //And have the object poll reference of our spikes.
+    public ObjectPoolScript spikePool;
+    //Have a random spike generator percentage.
+    public float randomSpikeGeneratePercentage;
+
+
+    public float pickupHeight;
+    public ObjectPoolScript powerUpPool;
+    public float powerUpPercentage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +86,15 @@ public class PlatformCreator : MonoBehaviour
             }
 
 
+            if (Random.Range(0.0f, 100.0f) < powerUpPercentage)
+            {
+                GameObject newPowerup = powerUpPool.getPooledObject();
+
+                newPowerup.transform.position = transform.position + new Vector3(distanceBetween / 2.0f, Random.Range(2.0f,pickupHeight), 0.0f);
+
+                newPowerup.SetActive(true);
+            }
+
             transform.position = new Vector3(transform.position.x + (platformWidths[platformIndex] / 2) + distanceBetween, heightChange, transform.position.z);
 
             
@@ -87,15 +106,31 @@ public class PlatformCreator : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
+
+            // Based on the percentage, if we generate a number that is less then the percentage number, create the coins.
             if (Random.Range(0.0f, 100.0f) < randomCoinGeneratePercentage)
             {
-                
-                
-                
-                
+
                 // Add the coins to the platform.
                 coinCreator.GenerateCoins(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z));
             }
+
+            // Based on the percentage, if we generate a number that is less then the percentage number, create the spikes.
+            if (Random.Range(0.0f, 100.0f) < randomSpikeGeneratePercentage)
+            {
+                GameObject newSpike = spikePool.getPooledObject();
+
+                float spikeXPos = Random.Range(-platformWidths[platformIndex] / 2 + 1.0f, platformWidths[platformIndex] / 2 - 1.0f);
+
+
+
+                Vector3 spikePos = new Vector3(spikeXPos, 0.5f, 0f);
+
+                newSpike.transform.position = transform.position + spikePos;
+                newSpike.transform.rotation = transform.rotation;
+                newSpike.SetActive(true);
+            }
+
 
             transform.position = new Vector3(transform.position.x + (platformWidths[platformIndex] / 2), transform.position.y, transform.position.z);
 
