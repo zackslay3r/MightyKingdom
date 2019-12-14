@@ -27,8 +27,10 @@ public class ScoreManager : MonoBehaviour
     // If we do, set the high score to be that of the high score stored.
     void Start()
     {
+
         if (PlayerPrefs.HasKey("highScore"))
         {
+            
             highScore = PlayerPrefs.GetFloat("highScore");
         }
     }
