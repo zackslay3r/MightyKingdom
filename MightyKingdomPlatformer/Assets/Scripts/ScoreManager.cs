@@ -58,7 +58,7 @@ public class ScoreManager : MonoBehaviour
         highScoreText.text = "High Score: " + Mathf.Round(highScore);
     }
 
-
+    // Base on the score that is passed to this function, add the score.
     public void AddScore(int scoreToAdd)
     {
         if (shouldDouble)

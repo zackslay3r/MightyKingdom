@@ -13,10 +13,11 @@ public class PauseMenu : MonoBehaviour
 
     public void Start()
     {
+        // Find the score manager within the game.
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
-
+    // When we hit pause, we want to stop the time scale and set the pause menu to be active.
     public void pauseGame()
     {
         Time.timeScale = 0.0f;
@@ -24,13 +25,14 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-
+    // When we hit resume, we want time to be restored to normal and to deactivate the pause menu.
     public void resumeGame()
     {
         Time.timeScale = 1.0f;
         pauseMenu.SetActive(false);
     }
 
+    // When we hit Restart game, set the time scale back to normal, restart the game and set the pause menu to be inactive.
     public void RestartGame()
     {
         Time.timeScale = 1.0f;
@@ -38,6 +40,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
+    // When we hit the main menu, set the time back to normal and load the main menu scene.
     public void GoToMain()
     {
         Time.timeScale = 1.0f;

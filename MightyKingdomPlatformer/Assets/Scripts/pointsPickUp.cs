@@ -31,6 +31,7 @@ public class pointsPickUp : MonoBehaviour
             scoreManager.AddScore(scoreAmount);
             gameObject.SetActive(false);
 
+            // if we collect multiple coins at once, have the sound play again and not overlap.
             if (coinSound.isPlaying)
             {
                 coinSound.Stop();
@@ -45,9 +46,5 @@ public class pointsPickUp : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

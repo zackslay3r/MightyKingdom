@@ -28,14 +28,11 @@ public class ObjectPoolScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+ 
 
     public GameObject getPooledObject()
     {
+        // For all the pooled objects, if they are not active in the hierarchy, return the first non-active one.
         for (int i = 0; i < pooledObjects.Count; i++)
         {
             if (!pooledObjects[i].activeInHierarchy)

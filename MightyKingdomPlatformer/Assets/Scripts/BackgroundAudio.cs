@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// This script is responsible for playing the background music, regardless on whether or not we are in the main menu
+// or the game itself.
 public class BackgroundAudio : MonoBehaviour
 {
    

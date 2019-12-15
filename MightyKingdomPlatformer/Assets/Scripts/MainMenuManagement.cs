@@ -7,7 +7,7 @@ public class MainMenuManagement : MonoBehaviour
 {
     public string playGameName;
 
-
+    // When we hit play game, load the game.
     public void PlayGame()
     {
         SceneManager.LoadScene(playGameName);
