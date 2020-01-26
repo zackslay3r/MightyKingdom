@@ -59,7 +59,7 @@ public class PowerUps : MonoBehaviour
         }
         
         // then we should disable the pickup.
-        gameObject.SetActive(false);
+         gameObject.SetActive(false);
     }
 
 }

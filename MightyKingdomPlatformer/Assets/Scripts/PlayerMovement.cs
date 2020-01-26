@@ -72,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource jumpSound;
     public AudioSource deathSound;
 
+    // We also want to grab the PowerUp UI Elements so that when the player dies, we reset the timers and disable the icons.
+    public GameObject spikeUI;
+    public GameObject doubleUI;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -197,13 +202,23 @@ public class PlayerMovement : MonoBehaviour
         {
            
             gameManager.RestartGame();
-            
+
+
+
+            // reset the values of the UI element timers and the icons.
+            spikeUI.GetComponent<Timer>().timer = 0;
+            doubleUI.GetComponent<Timer>().timer = 0;
+
+            spikeUI.SetActive(false);
+            doubleUI.SetActive(false);
             
             //Reset the speed and the milestoneCount.
             speed = storedSpeed;
             speedMilestoneCount = speedMilestoneCountStored;
             distanceMilestone = distanceMilestoneStored;
             deathSound.Play();
+
+
         }
     }
 

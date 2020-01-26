@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerUpManager : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class PowerUpManager : MonoBehaviour
     private bool safeMode;
 
     // determine if the powerup is active.
-    private bool powerupActive;
+    private bool noSpikesCurrent;
+    private bool doublePointsCurrent;
 
     // This is a time for all the powerups.
     public float timeForPowerup;
@@ -34,6 +36,15 @@ public class PowerUpManager : MonoBehaviour
     public AudioSource noSpikesSound;
     public AudioSource doublePointsSound;
 
+    // We also need to get a reference to each of the powerup timers.
+    public GameObject spikeNoMore;
+    public GameObject doublePoint;
+
+    // We also need a timer for each of the powerups.
+    private float safeModeTimer;
+    private float doublePointsTimer;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,10 +60,15 @@ public class PowerUpManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+      
+
+
         // If we have a powerup active, we need to ensure that the time for the powerup goes down.
-        if (powerupActive)
-        {
-            timeForPowerup -= Time.deltaTime;
+        //if (powerupActive)
+       // {
+
+            //timeForPowerup -= Time.deltaTime;
 
             // if the game manager wants a power up to be reset, then set the time for the powerup to 0 and set the boolean to false.
             if (gameManager.powerUpReset)
@@ -62,27 +78,55 @@ public class PowerUpManager : MonoBehaviour
             }
 
             // If double points is active, set the score per second to be 2x and set the should double boolean to true
-            if (doublePoints)
+            if (doublePointsCurrent)
             {
                 scoreManagement.scorePerSecond = normalPointsPerSecond * 2.0f;
                 scoreManagement.shouldDouble = true;
+                Timer doubleTimer = doublePoint.GetComponentInChildren<Timer>();
+
+                doubleTimer.timer = Mathf.Round(doublePointsTimer -= Time.deltaTime);
             }
             //if we are in safe mode, set the random spike percentage to 0.
-            if (safeMode)
+            if (noSpikesCurrent)
             {
-                 platformGenerator.randomSpikeGeneratePercentage = 0.0f;
+
+                    platformGenerator.randomSpikeGeneratePercentage = 0.0f;
+                    Timer spikeTimer = spikeNoMore.GetComponentInChildren<Timer>();
+                    if (spikeTimer)
+                    {
+
+                        spikeTimer.timer = Mathf.Round(safeModeTimer -= Time.deltaTime);
+
+                    }
+                
             }
 
             // Once the time reaches 0, turn off the powerup and reset all values.
-            if (timeForPowerup <= 0)
+            //if (timeForPowerup <= 0)
+            //{
+            //    powerupActive = false;
+            //    scoreManagement.scorePerSecond = normalPointsPerSecond;
+            //    scoreManagement.shouldDouble = false;
+
+            //}
+            if (safeModeTimer <= 0 && noSpikesCurrent)
             {
-                powerupActive = false;
+                platformGenerator.randomSpikeGeneratePercentage = spikeRate;
+                noSpikesCurrent = false;
+                spikeNoMore.SetActive(false);
+            }
+            if (doublePointsTimer <= 0 && doublePointsCurrent)
+            {
+                doublePointsCurrent = false;
                 scoreManagement.scorePerSecond = normalPointsPerSecond;
                 scoreManagement.shouldDouble = false;
-                platformGenerator.randomSpikeGeneratePercentage = spikeRate;
+                doublePoint.SetActive(false);
             }
-        
-        }
+
+
+        // }
+
+
     }
 
 
@@ -92,6 +136,25 @@ public class PowerUpManager : MonoBehaviour
         doublePoints = points;
         safeMode = spikes;
         timeForPowerup = time;
+
+
+        // We then want to check to see which powerup was collected via the activate powerup function.
+        // Once we know which of thses were activated, activate the visual timer
+
+        if (safeMode)
+        {
+            safeModeTimer = time;
+            spikeNoMore.SetActive(true);
+            noSpikesCurrent = true;
+            Timer spikeTimer = spikeNoMore.GetComponentInChildren<Timer>();
+            if (spikeTimer)
+            {
+
+                spikeTimer.timer = safeModeTimer;
+            }
+
+        }
+
 
         // get references to the original values of the score multiple and the spike remover.
         normalPointsPerSecond = scoreManagement.scorePerSecond;
@@ -110,17 +173,34 @@ public class PowerUpManager : MonoBehaviour
             }
         }
 
-        // Depending on which pickup it is, play the corresponding sound.
+
         if (doublePoints)
         {
-             doublePointsSound.Play();
+            doublePointsTimer = time;
+            doublePointsCurrent = true;
+            doublePoint.SetActive(true);
+
+            Timer doubleTimer = spikeNoMore.GetComponentInChildren<Timer>();
+            if (doubleTimer)
+            {
+
+                doubleTimer.timer = doublePointsTimer;
+            }
         }
+
+        //// Depending on which pickup it is, play the corresponding sound.
+        if (doublePoints)
+        {
+            doublePointsSound.Play();
+            
+        }
+    
         if (safeMode)
         {
             noSpikesSound.Play();
         }
         // then, set the powerup to be active.
-        powerupActive = true;
+        //powerupActive = true;
 
 
         
