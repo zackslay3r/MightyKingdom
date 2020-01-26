@@ -8,6 +8,7 @@ public class PowerUpManager : MonoBehaviour
     // For each of our powerups, have a bool.
     private bool doublePoints;
     private bool safeMode;
+    private bool slow;
 
     // determine if the powerup is active.
     private bool noSpikesCurrent;
@@ -44,7 +45,7 @@ public class PowerUpManager : MonoBehaviour
     private float safeModeTimer;
     private float doublePointsTimer;
 
-
+    public PlayerMovement player;
 
     // Start is called before the first frame update
     void Start()
@@ -130,11 +131,12 @@ public class PowerUpManager : MonoBehaviour
     }
 
 
-    public void ActivatePowerup(bool points, bool spikes, float time)
+    public void ActivatePowerup(bool points, bool spikes, bool slowDown, float time)
     {
         // recieve the values from the pickup on what type of pickup and how long the pickup lasts.
         doublePoints = points;
         safeMode = spikes;
+        slow = slowDown;
         timeForPowerup = time;
 
 
@@ -187,6 +189,18 @@ public class PowerUpManager : MonoBehaviour
                 doubleTimer.timer = doublePointsTimer;
             }
         }
+
+
+        if (slow)
+        {
+            
+
+            player.speed = player.speed * 0.85f;
+            player.distanceMilestone = ((player.distanceMilestone + player.speedMultiplier) * 0.8f);
+            player.speedMilestoneCount += player.distanceMilestone;
+        }
+
+
 
         //// Depending on which pickup it is, play the corresponding sound.
         if (doublePoints)

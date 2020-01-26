@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // The distance milestone is the length from the current milestone till the next milestone until the speed is increased.
     // The speedMilestoneCount is the total length that would've needed to have been travelled in order to get to the next milestone.
     public float distanceMilestone;
-    private float speedMilestoneCount;
+    public float speedMilestoneCount;
 
     // This will be used when the game restarts, setting the player milesstones to the original values.
     private float speedMilestoneCountStored;
@@ -76,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject spikeUI;
     public GameObject doubleUI;
 
+
+    
 
 
     // Start is called before the first frame update
@@ -138,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Began)
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
+           
             //if we are in the sky and not on the ground, and we are able to double jump, perform the 'double jump'
             if (!onGround && inSky && canDoubleJump)
             {
@@ -164,7 +167,8 @@ public class PlayerMovement : MonoBehaviour
         // until the timer hits 0.
             if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
-                if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
+            
+            if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
                 {
                     playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
                     inSky = true;
