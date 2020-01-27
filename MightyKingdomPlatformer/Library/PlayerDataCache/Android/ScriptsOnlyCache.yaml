@@ -482,7 +482,7 @@ ScriptsOnlyBuild:
     className: ScoreManager
   - hash:
       serializedVersion: 2
-      Hash: f1b962c60598270bcdb04ffa954d2094
+      Hash: 38bcf97a2239d777a866cc969a8cf9ed
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PowerUpManager
@@ -524,7 +524,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 12b2cef60e04f7154a7b79cbdc6a12de
+      Hash: 6cb0edd5a4d9598742ffb7b118b1fadd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManagement
@@ -662,7 +662,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: fe51186dc51ebc65e8a0da8e569de453
+      Hash: 808dbfa08e71c0f5ce64e17a11342352
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PauseMenu

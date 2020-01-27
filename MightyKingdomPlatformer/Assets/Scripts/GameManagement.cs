@@ -28,6 +28,9 @@ public class GameManagement : MonoBehaviour
     //Get a reference to the power up manager so that the score per second can be fixed.
     public PowerUpManager puManager;
 
+    //Get a reference to the pause button so that in case the player dies, we can hide the pause button.
+    public GameObject pauseButton;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -60,9 +63,11 @@ public class GameManagement : MonoBehaviour
         puManager.safeModeTimer = 0f;
         puManager.doublePointsTimer = 0f;
 
-
+        
         scoreManager.shouldDouble = false;
         scoreManager.scorePerSecond = puManager.normalPointsPerSecond;
+        //Disable the pause button.
+        pauseButton.SetActive(false);
     }
     public void Reset()
     {
@@ -89,7 +94,8 @@ public class GameManagement : MonoBehaviour
         scoreManager.increaseScore = true;
         // Allow the power up to be reset.
         powerUpReset = true;
-
+        // Once the game has been reset, Set the pause button up again.
+        pauseButton.SetActive(true);
       
     }
 

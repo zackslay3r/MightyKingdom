@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2187,6 +2187,7 @@ MonoBehaviour:
   deathScreen: {fileID: 689008477}
   powerUpReset: 0
   puManager: {fileID: 813729147}
+  pauseButton: {fileID: 637297034}
 --- !u!4 &1842888912
 Transform:
   m_ObjectHideFlags: 0

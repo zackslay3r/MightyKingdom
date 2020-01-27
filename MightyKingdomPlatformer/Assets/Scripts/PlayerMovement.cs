@@ -76,7 +76,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject spikeUI;
     public GameObject doubleUI;
 
-
+    // Create a boolean that will be set to true once a platform has been determined to recieve input.
+    private bool platformSelector;
     
 
 
@@ -121,18 +122,27 @@ public class PlayerMovement : MonoBehaviour
         // Determine if we are on the ground by checking if we are touchiing anything of the layer 'ground'
         onGround = Physics2D.OverlapCircle(groundCheck.position, checkerSize, definedGround);
 
+        platformSelector = false;
+        #if UNITY_ANDROID
+                inputCheckForPC();
+                platformSelector = true;
+        #endif
+        #if UNITY_EDITOR
+        if (!platformSelector)
+        {
+            inputCheckForPC();
+            platformSelector = true;
+        }
+        #endif
 
-//    #if UNITY_EDITOR
-//        inputCheckForPC();
-//#endif
-
-#if UNITY_STANDALONE_WIN
-         inputCheckForPC();
-#endif
-
-#if UNITY_ANDROID
+       #if UNITY_STANDALONE_WIN
+       if (!platformSelector)
+        {
         inputCheckForPC();
-#endif
+        }
+        #endif
+
+
 
 
         //Set the values of Speed and grounded within the animator to be that of the player velocity and of the 'OnGround' boolean.
