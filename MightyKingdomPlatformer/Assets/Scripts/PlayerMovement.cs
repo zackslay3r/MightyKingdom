@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
     // This is the inital speed of the player when the game starts.
@@ -138,9 +138,17 @@ public class PlayerMovement : MonoBehaviour
 
         // If we hit the spacebar or tap the screen, then we want the player to jump
         //if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Began)
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-           
+
+            // This will prevent the rest of the jumping code from occuring should the player click on a UI element.
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
+
+
             //if we are in the sky and not on the ground, and we are able to double jump, perform the 'double jump'
             if (!onGround && inSky && canDoubleJump)
             {
