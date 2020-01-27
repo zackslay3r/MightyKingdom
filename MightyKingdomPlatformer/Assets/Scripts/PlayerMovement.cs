@@ -115,87 +115,26 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+ 
 
 
         // Determine if we are on the ground by checking if we are touchiing anything of the layer 'ground'
         onGround = Physics2D.OverlapCircle(groundCheck.position, checkerSize, definedGround);
 
-       
-       
-        // If we have hit the distance milestone, increase the speed of the player by the speed multiplier
-        // Then set a new distance milestone, as well as and on the dsitance milestone to the speedMilestoneCount.
-        if (transform.position.x > speedMilestoneCount)
-        {
-            speed = speed * speedMultiplier;
 
-            distanceMilestone = distanceMilestone * speedMultiplier;
-            speedMilestoneCount += distanceMilestone;
-        }
+//    #if UNITY_EDITOR
+//        inputCheckForPC();
+//#endif
 
-        // Have the player automatically move based on the speed that was predefined.
-        playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
+#if UNITY_STANDALONE_WIN
+         inputCheckForPC();
+#endif
 
-        // If we hit the spacebar or tap the screen, then we want the player to jump
-        //if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Began)
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            // This will prevent the rest of the jumping code from occuring should the player click on a UI element.
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                return;
-            }
+#if UNITY_ANDROID
+        inputCheckForPC();
+#endif
 
 
-
-            //if we are in the sky and not on the ground, and we are able to double jump, perform the 'double jump'
-            if (!onGround && inSky && canDoubleJump)
-            {
-                jumpTimeCounter = jumpTime;
-                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
-                // disable the double jump so the player cant jump again.
-                canDoubleJump = false;
-                
-                jumpSound.Play();
-            }
-
-            //If we are on the ground, allow the player the ability to be able to jump.
-            if (onGround)
-            {
-                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
-                
-                onGround = false;
-                jumpSound.Play();
-               
-            }
-            
-        }
-        // If the player holds down the space or mouse button, then keep adding power to the jump
-        // until the timer hits 0.
-            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
-            {
-            
-            if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
-                {
-                    playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
-                    inSky = true;
-                    jumpTimeCounter -= Time.deltaTime;
-
-              
-                }
-            }
-
-        //Once the player has let go of the space bar, dont allow them to press the space bar again.
-
-        if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
-        {
-            jumpTimeCounter = 0;
-          
-
-
-        }
-       
         //Set the values of Speed and grounded within the animator to be that of the player velocity and of the 'OnGround' boolean.
         playerAnimator.SetFloat("Speed", playerRb.velocity.x);
         playerAnimator.SetBool("Grounded", onGround);
@@ -212,7 +151,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "KillVolume")
         {
-           
+            
+
             gameManager.RestartGame();
 
 
@@ -234,4 +174,177 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void inputCheckForPC()
+    {
+
+
+        // If we have hit the distance milestone, increase the speed of the player by the speed multiplier
+        // Then set a new distance milestone, as well as and on the dsitance milestone to the speedMilestoneCount.
+        if (transform.position.x > speedMilestoneCount)
+        {
+            speed = speed * speedMultiplier;
+
+            distanceMilestone = distanceMilestone * speedMultiplier;
+            speedMilestoneCount += distanceMilestone;
+        }
+
+        // Have the player automatically move based on the speed that was predefined.
+        playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
+
+        // If we hit the spacebar or tap the screen, then we want the player to jump
+        //if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            // This will prevent the rest of the jumping code from occuring should the player click on a UI element.
+            if (EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject != null)
+            {
+                return;
+            }
+
+
+
+            //if we are in the sky and not on the ground, and we are able to double jump, perform the 'double jump'
+            if (!onGround && inSky && canDoubleJump)
+            {
+                jumpTimeCounter = jumpTime;
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                // disable the double jump so the player cant jump again.
+                canDoubleJump = false;
+
+                jumpSound.Play();
+            }
+
+            //If we are on the ground, allow the player the ability to be able to jump.
+            if (onGround)
+            {
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+
+                onGround = false;
+                jumpSound.Play();
+
+            }
+
+        }
+        // If the player holds down the space or mouse button, then keep adding power to the jump
+        // until the timer hits 0.
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            // This will prevent the rest of the jumping code from occuring should the player click on a UI element.
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
+            {
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                inSky = true;
+                jumpTimeCounter -= Time.deltaTime;
+
+
+            }
+        }
+
+
+       
+
+            //Once the player has let go of the space bar, dont allow them to press the space bar again.
+
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
+        {
+            jumpTimeCounter = 0;
+
+
+
+        }
+
+
+    } 
+    private void inputCheckForAndroid()
+    {
+        // If we have hit the distance milestone, increase the speed of the player by the speed multiplier
+        // Then set a new distance milestone, as well as and on the dsitance milestone to the speedMilestoneCount.
+        if (transform.position.x > speedMilestoneCount)
+        {
+            speed = speed * speedMultiplier;
+
+            distanceMilestone = distanceMilestone * speedMultiplier;
+            speedMilestoneCount += distanceMilestone;
+        }
+
+        // Have the player automatically move based on the speed that was predefined.
+        playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
+
+        // If we hit the spacebar or tap the screen, then we want the player to jump
+        //if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0)
+        {
+
+            //// This will prevent the rest of the jumping code from occuring should the player click on a UI element.
+            //if (EventSystem.current.IsPointerOverGameObject())
+            //{
+            //    return;
+            //}
+
+             if (EventSystem.current.currentSelectedGameObject != null) {
+                //Touched UI
+                return;
+                }
+
+            //if we are in the sky and not on the ground, and we are able to double jump, perform the 'double jump'
+            if (!onGround && inSky && canDoubleJump)
+            {
+                jumpTimeCounter = jumpTime;
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                // disable the double jump so the player cant jump again.
+                canDoubleJump = false;
+
+                jumpSound.Play();
+            }
+
+            //If we are on the ground, allow the player the ability to be able to jump.
+            if (onGround)
+            {
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+
+                onGround = false;
+                jumpSound.Play();
+
+            }
+
+        }
+        // If the player holds down the space or mouse button, then keep adding power to the jump
+        // until the timer hits 0.
+        if (Input.touchCount > 0)
+        {
+            // This will prevent the rest of the jumping code from occuring should the player click on a UI element.
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
+            {
+                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpPower);
+                inSky = true;
+                jumpTimeCounter -= Time.deltaTime;
+
+
+            }
+        }
+
+
+
+
+        //Once the player has let go of the space bar, dont allow them to press the space bar again.
+
+        if (Input.touchCount == 0)
+        {
+            jumpTimeCounter = 0;
+
+
+
+        }
+
+
+    }
 }

@@ -19,7 +19,7 @@ public class PowerUpManager : MonoBehaviour
 
     // This is reference to both the score and platform managers so that we are able to access data.
     private ScoreManager scoreManagement;
-    private float normalPointsPerSecond;
+    public float normalPointsPerSecond;
 
     // This is reference to the platform generate and the spikerate. 
     // this is so we can remove the spikes, as well as reset the spike rate.
@@ -42,8 +42,8 @@ public class PowerUpManager : MonoBehaviour
     public GameObject doublePoint;
 
     // We also need a timer for each of the powerups.
-    private float safeModeTimer;
-    private float doublePointsTimer;
+    public float safeModeTimer;
+    public float doublePointsTimer;
 
     public PlayerMovement player;
 
@@ -56,6 +56,9 @@ public class PowerUpManager : MonoBehaviour
         platformGenerator = FindObjectOfType<PlatformCreator>();
         gameManager = FindObjectOfType<GameManagement>();
 
+        // get references to the original values of the score multiple and the spike remover.
+        normalPointsPerSecond = scoreManagement.scorePerSecond;
+        spikeRate = platformGenerator.randomSpikeGeneratePercentage;
     }
 
     // Update is called once per frame
@@ -79,7 +82,7 @@ public class PowerUpManager : MonoBehaviour
             }
 
             // If double points is active, set the score per second to be 2x and set the should double boolean to true
-            if (doublePointsCurrent)
+            if (doublePointsCurrent && doublePointsTimer > 0f)
             {
                 scoreManagement.scorePerSecond = normalPointsPerSecond * 2.0f;
                 scoreManagement.shouldDouble = true;
@@ -158,9 +161,6 @@ public class PowerUpManager : MonoBehaviour
         }
 
 
-        // get references to the original values of the score multiple and the spike remover.
-        normalPointsPerSecond = scoreManagement.scorePerSecond;
-        spikeRate = platformGenerator.randomSpikeGeneratePercentage;
 
         // If we are in safe mode now, find all the spikes within the level and deactivate them.
         if (safeMode)

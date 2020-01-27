@@ -11,6 +11,9 @@ public class PauseMenu : MonoBehaviour
     // We also want a reference to our pause menu so that we can bring up the pause menu when the button is clicked.
     public GameObject pauseMenu;
 
+    //get a reference to the pause button so that we can disable it while we are paused.
+    public GameObject pauseButton;
+
     public bool buttonClicked = false;
 
 
@@ -27,7 +30,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0.0f;
         pauseMenu.SetActive(true);
         buttonClicked = false;
-
+        pauseButton.SetActive(false);
     }
 
     // When we hit resume, we want time to be restored to normal and to deactivate the pause menu.
@@ -37,6 +40,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1.0f;
         pauseMenu.SetActive(false);
         buttonClicked = false;
+        pauseButton.SetActive(true);
     }
 
     // When we hit Restart game, set the time scale back to normal, restart the game and set the pause menu to be inactive.
@@ -47,6 +51,7 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<GameManagement>().Reset();
         pauseMenu.SetActive(false);
         buttonClicked = false;
+        pauseButton.SetActive(true);
     }
 
     // When we hit the main menu, set the time back to normal and load the main menu scene.

@@ -14,6 +14,7 @@ ScriptsOnlyBuild:
     - PowerUpManager
     - PowerUps
     - ScoreManager
+    - Timer
     - objectRemover
     - pointsPickUp
     Unity.2D.Tilemap.Editor.dll:
@@ -205,9 +206,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13050}
     - Class: 114
-      Script: {instanceID: 13106}
+      Script: {instanceID: 13052}
     - Class: 114
-      Script: {instanceID: 13174}
+      Script: {instanceID: 13108}
+    - Class: 114
+      Script: {instanceID: 13176}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -479,7 +482,7 @@ ScriptsOnlyBuild:
     className: ScoreManager
   - hash:
       serializedVersion: 2
-      Hash: 28f48bb5cb7bd6ec5c0262a68421f342
+      Hash: f1b962c60598270bcdb04ffa954d2094
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PowerUpManager
@@ -641,7 +644,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 067c5c38b7768e011af93d1272439654
+      Hash: 01aaf1820fae64a6b2924bf83ddad4fc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PowerUps
@@ -659,7 +662,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 7320300258cec3a89e492a7e3d4b02df
+      Hash: fe51186dc51ebc65e8a0da8e569de453
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PauseMenu
@@ -689,7 +692,7 @@ ScriptsOnlyBuild:
     className: ActivationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: bf28d129e4d6a51744832c0ac2965b9a
+      Hash: 3dedc24705ed335580b3514d0e2b763b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement
@@ -857,6 +860,12 @@ ScriptsOnlyBuild:
     className: StandaloneInputModule
   - hash:
       serializedVersion: 2
+      Hash: ec292de7e6592254b68f0674433977f1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Timer
+  - hash:
+      serializedVersion: 2
       Hash: aa88ae22474df55295327e4ee99e5a24
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -907,4 +916,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/MightyKingdom.unity
-  playerPath: C:/Users/zacka/Desktop/MKEXE/MightyKingdomPlatformer.exe
+  playerPath: C:/Users/zacka/Desktop/MightyKingdomPlatformer.exe

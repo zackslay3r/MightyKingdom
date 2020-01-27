@@ -25,6 +25,9 @@ public class GameManagement : MonoBehaviour
     // This is a boolean that checks if we should reset the powerups.
     public bool powerUpReset;
 
+    //Get a reference to the power up manager so that the score per second can be fixed.
+    public PowerUpManager puManager;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -53,6 +56,13 @@ public class GameManagement : MonoBehaviour
 
         deathScreen.gameObject.SetActive(true);
 
+        // Set the timers to 0 for each of the powerups. disabling them immediately.
+        puManager.safeModeTimer = 0f;
+        puManager.doublePointsTimer = 0f;
+
+
+        scoreManager.shouldDouble = false;
+        scoreManager.scorePerSecond = puManager.normalPointsPerSecond;
     }
     public void Reset()
     {
@@ -79,6 +89,8 @@ public class GameManagement : MonoBehaviour
         scoreManager.increaseScore = true;
         // Allow the power up to be reset.
         powerUpReset = true;
+
+      
     }
 
 }
