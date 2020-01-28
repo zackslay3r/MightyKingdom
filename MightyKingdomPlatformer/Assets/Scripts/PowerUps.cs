@@ -8,6 +8,7 @@ public class PowerUps : MonoBehaviour
     public bool doublePoints;
     public bool safeMode;
     public bool slowDown;
+    public bool level;
 
     // have a time for all the powerups.
     public float timer;
@@ -48,6 +49,10 @@ public class PowerUps : MonoBehaviour
                 slowDown = true;
                 GetComponent<SpriteRenderer>().sprite = pickUpSprites[2];
                 break;
+                case 3:
+                level = true;
+                GetComponent<SpriteRenderer>().sprite = pickUpSprites[3];
+                break;
 
 
         
@@ -59,7 +64,7 @@ public class PowerUps : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            puManager.ActivatePowerup(doublePoints, safeMode,slowDown, timer);
+            puManager.ActivatePowerup(doublePoints, safeMode,slowDown,level, timer);
          
         
         }

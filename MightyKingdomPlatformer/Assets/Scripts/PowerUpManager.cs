@@ -9,6 +9,7 @@ public class PowerUpManager : MonoBehaviour
     private bool doublePoints;
     private bool safeMode;
     private bool slow;
+    private bool level;
 
     // determine if the powerup is active.
     private bool noSpikesCurrent;
@@ -20,6 +21,9 @@ public class PowerUpManager : MonoBehaviour
     // This is reference to both the score and platform managers so that we are able to access data.
     private ScoreManager scoreManagement;
     public float normalPointsPerSecond;
+
+    // This is a reference to the original maximum height value that we will be changing when the player pick's up the level pickup.
+    public float maximumHeightOriginal;
 
     // This is reference to the platform generate and the spikerate. 
     // this is so we can remove the spikes, as well as reset the spike rate.
@@ -36,14 +40,19 @@ public class PowerUpManager : MonoBehaviour
     // These are the audio clips for the power ups.
     public AudioSource noSpikesSound;
     public AudioSource doublePointsSound;
+    public AudioSource slowSound;
+    public AudioSource levelSound;
 
-    // We also need to get a reference to each of the powerup timers.
+
+    // We also need to get a reference to each of the powerup UI elements to get access to their timers.
     public GameObject spikeNoMore;
     public GameObject doublePoint;
+    public GameObject levelUI;
 
     // We also need a timer for each of the powerups.
     public float safeModeTimer;
     public float doublePointsTimer;
+    public float levelTimer;
 
     public PlayerMovement player;
 
@@ -59,6 +68,7 @@ public class PowerUpManager : MonoBehaviour
         // get references to the original values of the score multiple and the spike remover.
         normalPointsPerSecond = scoreManagement.scorePerSecond;
         spikeRate = platformGenerator.randomSpikeGeneratePercentage;
+        maximumHeightOriginal = platformGenerator.maximumHeightChange;
     }
 
     // Update is called once per frame
@@ -68,21 +78,10 @@ public class PowerUpManager : MonoBehaviour
       
 
 
-        // If we have a powerup active, we need to ensure that the time for the powerup goes down.
-        //if (powerupActive)
-       // {
-
-            //timeForPowerup -= Time.deltaTime;
-
-            // if the game manager wants a power up to be reset, then set the time for the powerup to 0 and set the boolean to false.
-            if (gameManager.powerUpReset)
-            {
-                timeForPowerup = 0.0f;
-                gameManager.powerUpReset = false;
-            }
+       
 
             // If double points is active, set the score per second to be 2x and set the should double boolean to true
-            if (doublePointsCurrent && doublePointsTimer > 0f)
+            if (doublePointsCurrent)
             {
                 scoreManagement.scorePerSecond = normalPointsPerSecond * 2.0f;
                 scoreManagement.shouldDouble = true;
@@ -104,29 +103,32 @@ public class PowerUpManager : MonoBehaviour
                     }
                 
             }
-
-            // Once the time reaches 0, turn off the powerup and reset all values.
-            //if (timeForPowerup <= 0)
-            //{
-            //    powerupActive = false;
-            //    scoreManagement.scorePerSecond = normalPointsPerSecond;
-            //    scoreManagement.shouldDouble = false;
-
-            //}
-            if (safeModeTimer <= 0 && noSpikesCurrent)
+            if (level)
+            {
+                Timer levelUITimer = levelUI.GetComponentInChildren<Timer>();
+                levelUITimer.timer = Mathf.Round(levelTimer -= Time.deltaTime);
+        
+            }
+            
+            if (safeModeTimer <= 0f && noSpikesCurrent)
             {
                 platformGenerator.randomSpikeGeneratePercentage = spikeRate;
                 noSpikesCurrent = false;
                 spikeNoMore.SetActive(false);
             }
-            if (doublePointsTimer <= 0 && doublePointsCurrent)
+            if (doublePointsTimer <= 0f && doublePointsCurrent)
             {
                 doublePointsCurrent = false;
                 scoreManagement.scorePerSecond = normalPointsPerSecond;
                 scoreManagement.shouldDouble = false;
                 doublePoint.SetActive(false);
             }
-
+            if (level && levelTimer <= 0f)
+            {
+            platformGenerator.maximumHeightChange = maximumHeightOriginal;
+            levelUI.SetActive(false);
+            level = false;
+            }
 
         // }
 
@@ -134,12 +136,13 @@ public class PowerUpManager : MonoBehaviour
     }
 
 
-    public void ActivatePowerup(bool points, bool spikes, bool slowDown, float time)
+    public void ActivatePowerup(bool points, bool spikes, bool slowDown,bool levelValue, float time)
     {
         // recieve the values from the pickup on what type of pickup and how long the pickup lasts.
         doublePoints = points;
         safeMode = spikes;
         slow = slowDown;
+        level = levelValue;
         timeForPowerup = time;
 
 
@@ -198,8 +201,15 @@ public class PowerUpManager : MonoBehaviour
             player.speed = player.speed * 0.85f;
             player.distanceMilestone = ((player.distanceMilestone + player.speedMultiplier) * 0.8f);
             player.speedMilestoneCount += player.distanceMilestone;
+            slowSound.Play();
         }
 
+        if (level)
+        {
+            levelUI.SetActive(true);
+            levelTimer = time;
+            platformGenerator.maximumHeightChange = 0f;
+        }
 
 
         //// Depending on which pickup it is, play the corresponding sound.

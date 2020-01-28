@@ -31,6 +31,9 @@ public class GameManagement : MonoBehaviour
     //Get a reference to the pause button so that in case the player dies, we can hide the pause button.
     public GameObject pauseButton;
 
+    // Get a reference to the platform creator so that we can reset the maximum height point upon death.
+    public PlatformCreator platformMaker;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -68,6 +71,11 @@ public class GameManagement : MonoBehaviour
         scoreManager.scorePerSecond = puManager.normalPointsPerSecond;
         //Disable the pause button.
         pauseButton.SetActive(false);
+
+        platformMaker.maximumHeightChange = puManager.maximumHeightOriginal;
+        puManager.levelTimer = 0f;
+        puManager.levelUI.SetActive(false);
+
     }
     public void Reset()
     {
