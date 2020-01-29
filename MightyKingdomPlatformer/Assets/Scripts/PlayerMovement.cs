@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource jumpSound;
     public AudioSource deathSound;
 
+
     // We also want to grab the PowerUp UI Elements so that when the player dies, we reset the timers and disable the icons.
     public GameObject spikeUI;
     public GameObject doubleUI;

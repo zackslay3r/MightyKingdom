@@ -87,6 +87,6 @@ MonoBehaviour:
   randomCoinGeneratePercentage: 40
   spikePool: {fileID: 0}
   randomSpikeGeneratePercentage: 15
-  pickupHeight: 6
+  pickupHeight: 3
   powerUpPool: {fileID: 0}
-  powerUpPercentage: 100
+  powerUpPercentage: 30

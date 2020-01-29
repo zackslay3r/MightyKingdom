@@ -482,7 +482,7 @@ ScriptsOnlyBuild:
     className: ScoreManager
   - hash:
       serializedVersion: 2
-      Hash: 38bcf97a2239d777a866cc969a8cf9ed
+      Hash: ec45224457479b9f615b03fb48043cd6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PowerUpManager
@@ -524,7 +524,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 6cb0edd5a4d9598742ffb7b118b1fadd
+      Hash: fefc8f0275af02feff4c69d41cd845bd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManagement
@@ -644,7 +644,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 01aaf1820fae64a6b2924bf83ddad4fc
+      Hash: db662882839b059493b18f97d363d67e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PowerUps

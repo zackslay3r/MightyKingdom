@@ -11,9 +11,14 @@ public class PowerUpManager : MonoBehaviour
     private bool slow;
     private bool level;
 
+    // Have a int for the amount of score to be added via the gem.
+    public int gemAmount;
+
+
     // determine if the powerup is active.
     private bool noSpikesCurrent;
     private bool doublePointsCurrent;
+    private bool levelCurrent;
 
     // This is a time for all the powerups.
     public float timeForPowerup;
@@ -42,7 +47,7 @@ public class PowerUpManager : MonoBehaviour
     public AudioSource doublePointsSound;
     public AudioSource slowSound;
     public AudioSource levelSound;
-
+    public AudioSource gemSound;
 
     // We also need to get a reference to each of the powerup UI elements to get access to their timers.
     public GameObject spikeNoMore;
@@ -75,13 +80,8 @@ public class PowerUpManager : MonoBehaviour
     void Update()
     {
 
-      
-
-
-       
-
             // If double points is active, set the score per second to be 2x and set the should double boolean to true
-            if (doublePointsCurrent)
+            if (doublePointsCurrent && doublePointsTimer > 0)
             {
                 scoreManagement.scorePerSecond = normalPointsPerSecond * 2.0f;
                 scoreManagement.shouldDouble = true;
@@ -89,54 +89,73 @@ public class PowerUpManager : MonoBehaviour
 
                 doubleTimer.timer = Mathf.Round(doublePointsTimer -= Time.deltaTime);
             }
+
+
             //if we are in safe mode, set the random spike percentage to 0.
-            if (noSpikesCurrent)
+            if (noSpikesCurrent && safeModeTimer > 0)
             {
-
-                    platformGenerator.randomSpikeGeneratePercentage = 0.0f;
-                    Timer spikeTimer = spikeNoMore.GetComponentInChildren<Timer>();
-                    if (spikeTimer)
-                    {
-
-                        spikeTimer.timer = Mathf.Round(safeModeTimer -= Time.deltaTime);
-
-                    }
+                // We set the spike percentage change to 0.
+                platformGenerator.randomSpikeGeneratePercentage = 0.0f;
+                
+                // We then get a reference to the Timer component that is attached to the UI elements.
+                Timer spikeTimer = spikeNoMore.GetComponentInChildren<Timer>();
+                // If we sucessfully get a reference, then we want to set the timer to be that of the internal
+                // timer within the powerUpManager minus deltaTime.
+                if (spikeTimer)
+                {
+                spikeTimer.timer = Mathf.Round(safeModeTimer -= Time.deltaTime);
+                }
                 
             }
-            if (level)
+            // If we have the level pickup still active, then we want to simply decrement both the timers
+            // of the UI element and the internal timer.
+            if (levelTimer > 0f && levelCurrent)
             {
                 Timer levelUITimer = levelUI.GetComponentInChildren<Timer>();
                 levelUITimer.timer = Mathf.Round(levelTimer -= Time.deltaTime);
         
             }
             
+
+
+
+    // This is for when each of the timers hit 0 for each of the powerups.
+
+
+            // Once the nospikes timer is finished, we want to reset the random spike value to be what it originally was
+            // then we want to set the boolean values to false, signalling that we no longer have this powerup active.
             if (safeModeTimer <= 0f && noSpikesCurrent)
             {
                 platformGenerator.randomSpikeGeneratePercentage = spikeRate;
                 noSpikesCurrent = false;
                 spikeNoMore.SetActive(false);
             }
-            if (doublePointsTimer <= 0f && doublePointsCurrent)
+        // Once the doublePoints timer is finished, we want to reset the score per second value to be what it originally was
+        // then we want to set the boolean values to false, signalling that we no longer have this powerup active.
+        if (doublePointsTimer <= 0f && doublePointsCurrent)
             {
                 doublePointsCurrent = false;
                 scoreManagement.scorePerSecond = normalPointsPerSecond;
                 scoreManagement.shouldDouble = false;
                 doublePoint.SetActive(false);
             }
-            if (level && levelTimer <= 0f)
+        // Once the leveler timer is finished, we want to reset the random height value to be what it originally was
+        // then we want to set the boolean values to false, signalling that we no longer have this powerup active.
+        if (levelCurrent && levelTimer <= 0f)
             {
             platformGenerator.maximumHeightChange = maximumHeightOriginal;
             levelUI.SetActive(false);
-            level = false;
+            levelCurrent = false;
+
             }
 
-        // }
+        
 
 
     }
 
 
-    public void ActivatePowerup(bool points, bool spikes, bool slowDown,bool levelValue, float time)
+    public void ActivatePowerup(bool points, bool spikes, bool slowDown,bool levelValue,bool gem, float time)
     {
         // recieve the values from the pickup on what type of pickup and how long the pickup lasts.
         doublePoints = points;
@@ -151,23 +170,19 @@ public class PowerUpManager : MonoBehaviour
 
         if (safeMode)
         {
+            // set the boolean values that we use to check if the powerup is active to true.
             safeModeTimer = time;
             spikeNoMore.SetActive(true);
             noSpikesCurrent = true;
+            // get a reference to the UI element that is linked to the spike powerup.
             Timer spikeTimer = spikeNoMore.GetComponentInChildren<Timer>();
+            // if we got the reference, then make the UI timer be that of the built in timer. 
             if (spikeTimer)
             {
 
                 spikeTimer.timer = safeModeTimer;
             }
-
-        }
-
-
-
-        // If we are in safe mode now, find all the spikes within the level and deactivate them.
-        if (safeMode)
-        {
+            //find all the spikes within the level and deactivate them.
             spikeList = FindObjectsOfType<objectRemover>();
             for (int i = 0; i < spikeList.Length; i++)
             {
@@ -176,9 +191,14 @@ public class PowerUpManager : MonoBehaviour
                     spikeList[i].gameObject.SetActive(false);
                 }
             }
+            // Then play the sound effect for the pickup.
+            noSpikesSound.Play();
         }
 
 
+
+
+        // If we picked up a double point powerup, then set double points tto be active and set the UI timer.
         if (doublePoints)
         {
             doublePointsTimer = time;
@@ -191,41 +211,39 @@ public class PowerUpManager : MonoBehaviour
 
                 doubleTimer.timer = doublePointsTimer;
             }
+            // Then play the sound effect for the pickup.
+            doublePointsSound.Play();
         }
 
-
+        // If we picked up the slow pickup, apply the effects immediately with no timer.
         if (slow)
         {
             
 
             player.speed = player.speed * 0.85f;
-            player.distanceMilestone = ((player.distanceMilestone + player.speedMultiplier) * 0.8f);
-            player.speedMilestoneCount += player.distanceMilestone;
+            //player.distanceMilestone += 100f;
+            player.speedMilestoneCount += 100f;
+                        // Then play the sound effect for the pickup.
+
             slowSound.Play();
         }
-
+        // If its the level pickup, set the timer to be active and ensure the leveler bool is active.
         if (level)
         {
             levelUI.SetActive(true);
             levelTimer = time;
+            levelCurrent = true;
             platformGenerator.maximumHeightChange = 0f;
+            levelSound.Play();
         }
 
-
-        //// Depending on which pickup it is, play the corresponding sound.
-        if (doublePoints)
+        if (gem)
         {
-            doublePointsSound.Play();
-            
+            scoreManagement.AddScore(gemAmount);
+            gemSound.Play();
         }
-    
-        if (safeMode)
-        {
-            noSpikesSound.Play();
-        }
-        // then, set the powerup to be active.
-        //powerupActive = true;
 
+       
 
         
     }

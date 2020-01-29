@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ObjectPoolScript : MonoBehaviour
 {
+    // This is the object that we aim to pool.
     public GameObject objectToPool;
-
+    // This is the amount of the object we wish to pool
     public int poolAmount;
 
     public List<GameObject> pooledObjects;
