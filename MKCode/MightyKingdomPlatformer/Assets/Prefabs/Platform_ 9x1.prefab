@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 7763752947337362860}
   m_Layer: 8
   m_Name: Platform_ 9x1
-  m_TagString: Untagged
+  m_TagString: Platform9x1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4499f621a2c774541acc3437c7aca0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformDestroyPoint: {fileID: 0}
+  objectDestroyPoint: {fileID: 0}
 --- !u!1 &7763752947347652584
 GameObject:
   m_ObjectHideFlags: 0

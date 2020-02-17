@@ -19,7 +19,7 @@ public class objectRemover : MonoBehaviour
     {
         if (transform.position.x < objectDestroyPoint.transform.position.x)
         {
-            //Destroy(gameObject);
+           
             gameObject.SetActive(false);
         }
     }

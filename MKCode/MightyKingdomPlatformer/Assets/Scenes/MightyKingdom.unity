@@ -1995,6 +1995,7 @@ GameObject:
   - component: {fileID: 1842888912}
   - component: {fileID: 1842888911}
   - component: {fileID: 1842888913}
+  - component: {fileID: 1842888914}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2047,6 +2048,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9125730d773954b91fe59529c72081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1842888914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842888910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbb12edf27ae4e46b5ca8f7a68f1a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledWorldObjects: []
+  objectsToPool:
+  - {fileID: 8340117219434297218, guid: f26d67fd4b580d845926ff0b69350bfd, type: 3}
+  - {fileID: 1055042954591655836, guid: ff5a671e1b366624cbd4d62c0e635efe, type: 3}
+  - {fileID: 7763752947337362857, guid: e66e25b9a62a3f74bbc84722e86f32fe, type: 3}
+  - {fileID: 4287143472213653850, guid: 090a90f82e6eb714288acd82ffa898f7, type: 3}
+  - {fileID: 6357015903998153112, guid: a21c67bf12b41734594209d0940f2907, type: 3}
+  - {fileID: 3327152625567917675, guid: 1ae8b7be145bd32428dc188e492c0331, type: 3}
+  platform5x1Amount: 2
+  platform7x1Amount: 2
+  platform9x1Amount: 2
+  coinAmount: 15
+  powerUpAmount: 5
+  spikeAmount: 5
 --- !u!1 &1849748194 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2050620314956548017, guid: 2bba74b4fb4864c4ca628d102e9c707e,
@@ -3617,5 +3644,15 @@ PrefabInstance:
       propertyPath: powerUpPool
       value: 
       objectReference: {fileID: 168553512}
+    - target: {fileID: 8392597940493621667, guid: 044d85d8865b44a4eba27a4e45ce3210,
+        type: 3}
+      propertyPath: gp
+      value: 
+      objectReference: {fileID: 1842888914}
+    - target: {fileID: 8392597940493621667, guid: 044d85d8865b44a4eba27a4e45ce3210,
+        type: 3}
+      propertyPath: distanceBetween
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 044d85d8865b44a4eba27a4e45ce3210, type: 3}

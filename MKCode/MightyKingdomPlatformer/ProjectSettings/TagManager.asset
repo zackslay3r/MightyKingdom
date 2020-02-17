@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - KillVolume
+  - Platform5x1
+  - Platform7x1
+  - Platform9x1
+  - Coin
+  - PowerUp
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class PlatformCreator : MonoBehaviour
     public float distanceBetween;
 
     // These are our object pools that contain platforms.
-    public ObjectPoolScript[] ObjectPools;
+    //public ObjectPoolScript[] ObjectPools;
 
 
   
@@ -38,14 +38,20 @@ public class PlatformCreator : MonoBehaviour
     public float randomCoinGeneratePercentage;
 
     //And have the object poll reference of our spikes.
-    public ObjectPoolScript spikePool;
+    //public ObjectPoolScript spikePool;
     //Have a random spike generator percentage.
     public float randomSpikeGeneratePercentage;
 
     //This contains the pickup height, as well as the object pool for the powerups and the powerUp percentage chance.
     public float pickupHeight;
-    public ObjectPoolScript powerUpPool;
+    //public ObjectPoolScript powerUpPool;
     public float powerUpPercentage;
+
+
+    /** NEW CODE **/
+    // We will now have a reference to a global object pool.
+    public GlobalPooler gp;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -54,14 +60,33 @@ public class PlatformCreator : MonoBehaviour
         coinCreator = FindObjectOfType<CoinCreator>();
 
         // Get the length of the platform that we are about to generate.
-        platformWidths = new float[ObjectPools.Length];
+
+        // we will first need to grab our global object pool and see if they are a platform.
+        // we can do this by determining if they have a box collider or not. 
+        // if they do, we are going to increment an int that we will then use in determining platform length.
+
+        int platformAmount = 0;
+        gp.CreatePool();
+        for (int i = 0; i < gp.pooledWorldObjects.Count; i++)
+        {
+            if (gp.pooledWorldObjects[i].GetComponent<BoxCollider2D>())
+            {
+                platformAmount++;
+            }
+        }
+        platformWidths = new float[platformAmount];
+
+
+
 
         // For every object in our platform object pools, we are going to set the corresponding array index
         // within 'platformWidths' to be that of the platform we are looking at.
-        for (int i = 0; i < ObjectPools.Length; i++)
+        for (int i = 0; i < gp.pooledWorldObjects.Count; i++)
         {
-            platformWidths[i] = ObjectPools[i].objectToPool.GetComponent<BoxCollider2D>().size.x;
-
+            if (gp.pooledWorldObjects[i].tag != "KillVolume" && gp.pooledWorldObjects[i].tag != "Coin" && gp.pooledWorldObjects[i].tag != "PowerUp")
+            {
+                platformWidths[i] = gp.pooledWorldObjects[i].GetComponent<BoxCollider2D>().size.x;
+            }
         }
 
         minHeight = transform.position.y;
@@ -77,8 +102,11 @@ public class PlatformCreator : MonoBehaviour
         if (transform.position.x < generationPoint.position.x)
         {
             distanceBetween = Random.Range(pDistanceMin, pDistanceMax);
-            
-            platformIndex = Random.Range(0, ObjectPools.Length);
+
+            // This is the amount of different platforms we are using.
+            List<GameObject> platforms = gp.getDifferentPlatforms();
+
+            platformIndex = Random.Range(0, platforms.Count);
 
             // We then want to calculate a height differental for our platform.
             heightChange = transform.position.y + Random.Range(maximumHeightChange, -maximumHeightChange);
@@ -97,7 +125,7 @@ public class PlatformCreator : MonoBehaviour
             // if it is less then the power up percentage, make a new powerup.
             if (Random.Range(0.0f, 100.0f) < powerUpPercentage)
             {
-                GameObject newPowerup = powerUpPool.getPooledObject();
+                GameObject newPowerup = gp.getPooledObject("PowerUp");
 
                 // This powerup will be in between 2 platforms, with a random height difference.
                 newPowerup.transform.position = transform.position + new Vector3(distanceBetween / 2.0f, Random.Range(2.0f,pickupHeight), 0.0f);
@@ -110,7 +138,7 @@ public class PlatformCreator : MonoBehaviour
             
             
            // We then get a pooled platform and set its position and roation to be that of our platform creator.
-            GameObject newPlatform = ObjectPools[platformIndex].getPooledObject();
+            GameObject newPlatform = gp.getPooledObject(platforms[platformIndex].tag);
             
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
@@ -130,7 +158,7 @@ public class PlatformCreator : MonoBehaviour
             if (Random.Range(0.0f, 100.0f) < randomSpikeGeneratePercentage)
             {
                 // grab the spike from the spike object pool.
-                GameObject newSpike = spikePool.getPooledObject();
+                GameObject newSpike = gp.getPooledObject("KillVolume");
                 //These spikes will have a random position on the platform. based on this random x coordinate.
                 float spikeXPos = Random.Range(-platformWidths[platformIndex] / 2 + 1.0f, platformWidths[platformIndex] / 2 - 1.0f);
 
