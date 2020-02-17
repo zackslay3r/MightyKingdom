@@ -12,6 +12,7 @@ public class GlobalPooler : MonoBehaviour
 
     public int platform5x1Amount;
     public int platform7x1Amount;
+    public int platform9x1Amount;
     public int coinAmount;
     public int powerUpAmount;
     public int spikeAmount;
