@@ -5,6 +5,7 @@ ScriptsOnlyBuild:
     - CoinCreator
     - DeathMenu
     - GameManagement
+    - GlobalPooler
     - MainMenuManagement
     - ObjectPoolScript
     - PauseMenu
@@ -99,7 +100,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12396}
     - Class: 114
-      Script: {instanceID: 13050}
+      Script: {instanceID: 13052}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -200,22 +201,28 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12396}
     - Class: 114
-      Script: {instanceID: 12854}
+      Script: {instanceID: 12746}
     - Class: 114
-      Script: {instanceID: 12924}
+      Script: {instanceID: 12856}
     - Class: 114
-      Script: {instanceID: 13050}
+      Script: {instanceID: 12926}
     - Class: 114
       Script: {instanceID: 13052}
     - Class: 114
-      Script: {instanceID: 13108}
+      Script: {instanceID: 13054}
     - Class: 114
-      Script: {instanceID: 13176}
+      Script: {instanceID: 13110}
+    - Class: 114
+      Script: {instanceID: 13178}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 212
       Script: {instanceID: 0}
@@ -548,7 +555,7 @@ ScriptsOnlyBuild:
     className: LightweightRenderPipelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 9b07f553134980e62a830067c6e79874
+      Hash: aee552958c987eb8c6bd2a06a26d334c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlatformCreator
@@ -774,6 +781,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: e30daea6be57be4200782ead7a84dfba
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GlobalPooler
   - hash:
       serializedVersion: 2
       Hash: d5630f96bd5a6a6eed7e1754c3fb8703

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -345,53 +345,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &168553510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 168553511}
-  - component: {fileID: 168553512}
-  m_Layer: 0
-  m_Name: PowerUpPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &168553511
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168553510}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0750594, y: 1.4009997, z: -0.03125}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &168553512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168553510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effa019f333d4474e9ef8383297c707c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToPool: {fileID: 4287143472213653850, guid: 090a90f82e6eb714288acd82ffa898f7,
-    type: 3}
-  poolAmount: 5
-  pooledObjects: []
 --- !u!1 &221221639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4588733845040960493, guid: 5c913c0772860be4c9d4945f91d09955,
@@ -431,7 +384,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 280539471}
-  - component: {fileID: 280539472}
   m_Layer: 0
   m_Name: 5x1 Pooler
   m_TagString: Untagged
@@ -453,22 +405,6 @@ Transform:
   m_Father: {fileID: 633598459}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &280539472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280539470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effa019f333d4474e9ef8383297c707c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToPool: {fileID: 8340117219434297218, guid: f26d67fd4b580d845926ff0b69350bfd,
-    type: 3}
-  poolAmount: 2
-  pooledObjects: []
 --- !u!1 &326169874
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +564,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &448510892
 GameObject:
@@ -1161,7 +1097,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &838919513
 GameObject:
@@ -1172,7 +1108,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 838919514}
-  - component: {fileID: 838919515}
   m_Layer: 0
   m_Name: 9x1 Pooler
   m_TagString: Untagged
@@ -1194,22 +1129,6 @@ Transform:
   m_Father: {fileID: 633598459}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &838919515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838919513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effa019f333d4474e9ef8383297c707c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToPool: {fileID: 7763752947337362857, guid: e66e25b9a62a3f74bbc84722e86f32fe,
-    type: 3}
-  poolAmount: 2
-  pooledObjects: []
 --- !u!1 &851573741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,7 +1447,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1291356164}
-  - component: {fileID: 1291356165}
   m_Layer: 0
   m_Name: 7x1 Pooler
   m_TagString: Untagged
@@ -1549,69 +1467,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 633598459}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1291356165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291356163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effa019f333d4474e9ef8383297c707c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToPool: {fileID: 1055042954591655836, guid: ff5a671e1b366624cbd4d62c0e635efe,
-    type: 3}
-  poolAmount: 2
-  pooledObjects: []
---- !u!1 &1307624900
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1307624902}
-  - component: {fileID: 1307624901}
-  m_Layer: 0
-  m_Name: SpikePool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1307624901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307624900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effa019f333d4474e9ef8383297c707c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToPool: {fileID: 6357015903998153112, guid: a21c67bf12b41734594209d0940f2907,
-    type: 3}
-  poolAmount: 5
-  pooledObjects: []
---- !u!4 &1307624902
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307624900}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.55, y: 1.4604375, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1351816562 stripped
 AudioSource:
@@ -1664,7 +1519,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641392144}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -1738,7 +1593,7 @@ RectTransform:
   - {fileID: 1849748195}
   - {fileID: 723805615}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2810,7 +2665,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2486446475539788010, guid: e2fdeea390dff704f89c966ec46162e4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e2fdeea390dff704f89c966ec46162e4, type: 3}
 --- !u!114 &4407176331326597955 stripped
 MonoBehaviour:
@@ -3623,27 +3479,27 @@ PrefabInstance:
         type: 3}
       propertyPath: ObjectPools.Array.data[0]
       value: 
-      objectReference: {fileID: 838919515}
+      objectReference: {fileID: 0}
     - target: {fileID: 8392597940493621667, guid: 044d85d8865b44a4eba27a4e45ce3210,
         type: 3}
       propertyPath: ObjectPools.Array.data[1]
       value: 
-      objectReference: {fileID: 280539472}
+      objectReference: {fileID: 0}
     - target: {fileID: 8392597940493621667, guid: 044d85d8865b44a4eba27a4e45ce3210,
         type: 3}
       propertyPath: ObjectPools.Array.data[2]
       value: 
-      objectReference: {fileID: 1291356165}
+      objectReference: {fileID: 0}
     - target: {fileID: 8392597940493621667, guid: 044d85d8865b44a4eba27a4e45ce3210,
         type: 3}
       propertyPath: spikePool
       value: 
-      objectReference: {fileID: 1307624901}
+      objectReference: {fileID: 0}
     - target: {fileID: 8392597940493621667, guid: 044d85d8865b44a4eba27a4e45ce3210,
         type: 3}
       propertyPath: powerUpPool
       value: 
-      objectReference: {fileID: 168553512}
+      objectReference: {fileID: 0}
     - target: {fileID: 8392597940493621667, guid: 044d85d8865b44a4eba27a4e45ce3210,
         type: 3}
       propertyPath: gp
