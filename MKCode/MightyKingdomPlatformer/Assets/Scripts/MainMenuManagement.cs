@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class MainMenuManagement : MonoBehaviour
 {
-    public string playGameName;
+    public GameObject loadPanel;
 
     // When we hit play game, load the game.
     public void PlayGame()
     {
-        SceneManager.LoadScene(playGameName);
+        LoadingScreen.Instance.LoadScene("MightyKingdom");
+        
     }
     public void QuitGame()
     {

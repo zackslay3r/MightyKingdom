@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2610,6 +2610,11 @@ PrefabInstance:
       propertyPath: distanceBetweenCoins
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2486446475318891581, guid: e2fdeea390dff704f89c966ec46162e4,
+        type: 3}
+      propertyPath: pooler
+      value: 
+      objectReference: {fileID: 1842888914}
     - target: {fileID: 2486446475318891582, guid: e2fdeea390dff704f89c966ec46162e4,
         type: 3}
       propertyPath: m_LocalPosition.x

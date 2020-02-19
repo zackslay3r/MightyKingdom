@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 2d4ba77bae0a9584184617e45ed46b54
   - enabled: 1
+    path: Assets/Scenes/LoadingScreen.unity
+    guid: cd7dbaa23b7e51d48b559a77c216405e
+  - enabled: 1
     path: Assets/Scenes/MightyKingdom.unity
     guid: e40e4cb819cc7b042808904e22a71c3a
   m_configObjects: {}

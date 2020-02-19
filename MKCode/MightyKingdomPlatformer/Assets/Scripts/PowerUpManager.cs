@@ -28,7 +28,7 @@ public class PowerUpManager : MonoBehaviour
     public float normalPointsPerSecond;
 
     // This is a reference to the original maximum height value that we will be changing when the player pick's up the level pickup.
-    public float maximumHeightOriginal;
+   public float maximumHeightOriginal;
 
     // This is reference to the platform generate and the spikerate. 
     // this is so we can remove the spikes, as well as reset the spike rate.
